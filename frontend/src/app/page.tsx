@@ -145,7 +145,7 @@ export default function Home() {
   const [emailDismissed, setEmailDismissed] = useState(false);
   const [emailSending, setEmailSending] = useState(false);
 
-  const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL || "/api/v1";
+  const apiBaseUrl = "/api/v1";
 
   const handleAnalyze = async (e: React.FormEvent) => {
     e.preventDefault();
