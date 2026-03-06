@@ -294,7 +294,7 @@ async def _try_openrouter(company_name: str, raw_content: str, source_metadata: 
 
     headers = {
         "Authorization": f"Bearer {settings.OPENROUTER_API_KEY}",
-        "HTTP-Referer": "http://localhost:3000",
+        "HTTP-Referer": "https://sneak-3jg1.onrender.com",
         "X-OpenRouter-Title": "Sneak Intelligence",
         "Content-Type": "application/json",
     }

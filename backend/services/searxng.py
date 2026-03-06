@@ -73,10 +73,15 @@ class SearXNGService:
             return []
 
         # Fire ALL queries in parallel — our own SearXNG has no rate limit
-        async with httpx.AsyncClient(timeout=10.0) as client:
-            all_results = await asyncio.gather(
-                *[_run_query(client, q) for q in queries]
-            )
+        # Short timeout: if SearXNG isn't running (production), fail fast
+        try:
+            async with httpx.AsyncClient(timeout=10.0) as client:
+                all_results = await asyncio.gather(
+                    *[_run_query(client, q) for q in queries]
+                )
+        except Exception as e:
+            logger.warning(f"[SearXNG] Connection failed (expected in production): {e}")
+            return []
 
         for batch in all_results:
             for res in batch:

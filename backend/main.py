@@ -21,6 +21,10 @@ if settings.all_cors_origins:
 def root():
     return {"message": "Welcome to the Sneak API"}
 
+@app.get("/health")
+def health():
+    return {"status": "ok"}
+
 from api.routes import router
 app.include_router(router, prefix=settings.API_V1_STR)
 

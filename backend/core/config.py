@@ -12,6 +12,7 @@ class Settings(BaseSettings):
         "http://localhost",
         "http://127.0.0.1:3000",
         "http://127.0.0.1",
+        "https://sneak-3jg1.onrender.com",
     ]
     # Extra origins from env (comma-separated), e.g. "https://sneak.vercel.app,https://sneak-api.onrender.com"
     EXTRA_CORS_ORIGINS: str = ""
