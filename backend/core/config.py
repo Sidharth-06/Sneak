@@ -68,12 +68,12 @@ class Settings(BaseSettings):
     RESEND_API_KEY: str = ""
     RESEND_FROM: str = "onboarding@resend.dev"
 
-    # SMTP fallback (Gmail / any provider) — only used if RESEND_API_KEY is empty
-    SMTP_HOST: str = "smtp.gmail.com"
+    # SMTP (Brevo / any provider) — used if RESEND_API_KEY is empty
+    SMTP_HOST: str = "smtp-relay.brevo.com"
     SMTP_PORT: int = 587
     SMTP_USER: str = ""
     SMTP_PASS: str = ""
-    SMTP_FROM: str = "Company Insights <noreply@example.com>"
+    SMTP_FROM: str = "Sneak Intelligence <noreply@sneak.app>"
     SMTP_ENABLED: bool = False
 
     class Config:
