@@ -208,15 +208,18 @@ export default function Home() {
     }
   };
 
-  const handleEmailSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleEmailSubmit = async (e?: React.SyntheticEvent) => {
+    if (e) e.preventDefault();
     if (!emailInput || !currentJobId) return;
     setEmailSending(true);
     try {
       await axios.patch(`${apiBaseUrl}/jobs/${currentJobId}/email`, { email: emailInput });
       setEmailSubmitted(true);
-    } catch { }
-    finally { setEmailSending(false); }
+    } catch (err) {
+      console.error("Email submit failed:", err);
+    } finally {
+      setEmailSending(false);
+    }
   };
 
   const showEmailPrompt = status === "waiting_for_ai" && !emailSubmitted && !emailDismissed && currentJobId !== null;
