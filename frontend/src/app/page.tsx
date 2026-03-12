@@ -352,23 +352,30 @@ export default function Home() {
                         <div className="flex-1">
                           <h3 className="font-semibold text-white mb-1">Send me the PDF</h3>
                           <p className="text-sm text-purple-200/70 mb-4">Deep analysis can take up to 60 seconds. We can email you the final PDF report.</p>
-                          <form onSubmit={handleEmailSubmit} className="flex gap-2">
+                          <div className="flex gap-2">
                             <input
                               type="email"
                               value={emailInput}
                               onChange={(e) => setEmailInput(e.target.value)}
+                              onKeyDown={(e) => {
+                                if (e.key === 'Enter') {
+                                  e.preventDefault();
+                                  handleEmailSubmit(e);
+                                }
+                              }}
                               placeholder="work@email.com"
                               required
                               className="flex-1 bg-black/40 border border-white/10 rounded-lg px-4 py-2 text-sm text-white focus:border-purple-500/50 outline-none"
                             />
                             <button
-                              type="submit"
+                              type="button"
+                              onClick={handleEmailSubmit}
                               disabled={emailSending || !emailInput}
                               className="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors disabled:opacity-50 flex items-center gap-2"
                             >
                               {emailSending ? <Loader2 className="w-4 h-4 animate-spin" /> : null} Set Alert
                             </button>
-                          </form>
+                          </div>
                         </div>
                         <button onClick={() => setEmailDismissed(true)} className="text-zinc-500 hover:text-white"><X className="w-4 h-4" /></button>
                       </div>
