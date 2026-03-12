@@ -25,6 +25,7 @@ router = APIRouter()
 
 class AnalyzeRequest(BaseModel):
     company_name: str
+    email: str | None = None
 
 class EmailRequest(BaseModel):
     email: EmailStr
@@ -242,7 +243,12 @@ async def analyze_company(request: AnalyzeRequest, db: AsyncSession = Depends(ge
         await db.refresh(company)
         
     job_id = str(uuid.uuid4())
-    job = Job(id=job_id, company_id=company.id, status="pending")
+    job = Job(
+        id=job_id, 
+        company_id=company.id, 
+        status="pending",
+        email=request.email
+    )
     db.add(job)
     await db.commit()
     
